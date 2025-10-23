@@ -17,17 +17,23 @@
                 </flux:navlist.group>
             </flux:navlist>
 
+            <flux:navlist variant="outline">
+                <flux:navlist.group :heading="__('Tables')" class="grid">
+                    <livewire:tables-list />
+                </flux:navlist.group>
+            </flux:navlist>
+
+
             <flux:spacer />
 
             <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                {{ __('Repository') }}
-                </flux:navlist.item>
-
-                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                {{ __('Documentation') }}
-                </flux:navlist.item>
+                <flux:navlist.group>
+                    <flux:navlist.item icon="plus" :href="route('tables.create')" wire:navigate class="text-indigo-600 dark:text-indigo-400 font-medium">
+                        {{ __('Create New Table') }}
+                    </flux:navlist.item>
+                </flux:navlist.group>
             </flux:navlist>
+
 
             <!-- Desktop User Menu -->
             <flux:dropdown class="hidden lg:block" position="bottom" align="start">
