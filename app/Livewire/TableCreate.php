@@ -39,6 +39,7 @@ class TableCreate extends Component
             'column_count' => $this->column_count,
         ]);
 
+        // Redirect to the table’s view page
         return redirect()->route('tables.show', $table->url);
     }
 

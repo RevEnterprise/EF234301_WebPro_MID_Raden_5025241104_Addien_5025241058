@@ -22,6 +22,7 @@ class TableView extends Component
 
         $this->table = $table;
 
+        // Load cells from DB into a 2D array
         $this->loadCells();
     }
 
@@ -38,11 +39,12 @@ class TableView extends Component
 
     public function updatedCell($value, $key)
     {
-
+        // This isn't used in this approach, but if we use wire:model, it would be.
     }
 
     public function updateCell($row, $col, $content)
     {
+        // Find or create the cell record
         $cell = Cell::firstOrNew([
             'table_id' => $this->table->id,
             'row_coordinate' => $row,
@@ -52,6 +54,7 @@ class TableView extends Component
         $cell->content = $content;
         $cell->save();
 
+        // Update local state
         $this->cells[$row][$col] = $content;
     }
 
@@ -77,12 +80,20 @@ class TableView extends Component
             'name' => $this->newName,
         ]);
 
+        // Update the local property
         $this->table->refresh();
         $this->isRenaming = false;
         $this->newName = '';
     }
 
-    public function insertRow($row)
+    public function insertRowAbove($row)
+    {
+        $this->table->increment('row_count');
+        $this->table->refresh();
+        $this->loadCells();
+    }
+
+    public function insertRowBelow($row)
     {
         $this->table->increment('row_count');
         $this->table->refresh();
@@ -98,7 +109,14 @@ class TableView extends Component
         $this->loadCells();
     }
 
-    public function insertColumn($col)
+    public function insertColumnLeft($col)
+    {
+        $this->table->increment('column_count');
+        $this->table->refresh();
+        $this->loadCells();
+    }
+
+    public function insertColumnRight($col)
     {
         $this->table->increment('column_count');
         $this->table->refresh();

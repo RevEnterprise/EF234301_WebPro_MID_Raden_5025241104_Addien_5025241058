@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\TableController;
+use App\Http\Controllers\SidebarController;
 use App\Livewire\TableCreate;
 use App\Livewire\TableView;
 
